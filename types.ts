@@ -1,0 +1,1 @@
+type ButtonColor = 'default' | 'light' | 'highlight'
