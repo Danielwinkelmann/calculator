@@ -24,7 +24,13 @@ function calculate(value: typeof buttons[number]) {
   }
 
   if (value.calculation === '=') {
-    result.value = +eval(calculationString.value).toFixed(6) + ''
+    let stringToCalculate = calculationString.value
+    const percentValues = stringToCalculate.match(percentRegex)?.map((v) => v) || []
+    for (const iterator of  percentValues) {
+      console.log(iterator)
+      stringToCalculate = stringToCalculate.replace(iterator, (+iterator.replace('%', '') / 100).toString())
+    }
+    result.value = +eval(stringToCalculate).toFixed(6) + ''
     return
   }
   result.value = ''
@@ -134,6 +140,8 @@ const buttons = [
     color: 'highlight'
   },
 ] as const satisfies readonly Button[]
+
+const percentRegex = /((\d+)(\.\d+)?)%/gm
 
 useHead({
   htmlAttrs: {
