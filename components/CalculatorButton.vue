@@ -15,7 +15,7 @@ const colorClass: Record<typeof props.color, string> = {
 
 <template>
     <button :class="[colorClass[props.color], {
-        'rounded-l-full ml-2 my-2': props.display === '',
+        'rounded-l-full m-2 my-2': props.display === '',
         'rounded-r-full mr-2 my-2': props.display === '0',
         'rounded-full m-2': !!props.display && props.display !== '0'
     }]" class="aspect-square duration-100">

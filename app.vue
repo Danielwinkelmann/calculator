@@ -137,13 +137,13 @@ useHead({
 </script>
 
 <template>
-  <div class="mx-auto max-w-md h-screen flex flex-col justify-end ">
+  <div class="mx-auto max-w-md h-[100dvh] flex flex-col justify-end ">
     <div class="text-6xl flex justify-end items-end h-40 p-4 font-mono text-white">
       <span v-if="!result && !displayString">0</span>
       <span v-else-if="result">{{ result }}</span>
       <span v-else>{{ displayString }}</span>
     </div>
-    <div class="grid grid-cols-4">
+    <div class="grid grid-cols-4 p-4">
       <CalculatorButton v-for="item of buttons" @click="calculate(item)" :color="item.color" :display="item.display" />
     </div>
   </div>
