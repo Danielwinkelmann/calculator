@@ -11,6 +11,12 @@ const calculation = ref<Button[]>([])
 const displayString = computed(() => calculation.value.map(v => v.display).join(''))
 const calculationString = computed(() => calculation.value.map(v => v.calculation).join(''))
 function calculate(value: typeof buttons[number]) {
+
+  if (value.calculation === 'remove_last') {
+    calculation.value = calculation.value.slice(0, -1)
+    return
+  }
+
   if (value.calculation === 'AC') {
     calculation.value = []
     result.value = ''
@@ -108,9 +114,9 @@ const buttons = [
     color: 'highlight'
   },
   {
-    display: '',
-    calculation: 'unknown',
-    color: 'default'
+    display: '<',
+    calculation: 'remove_last',
+    color: 'highlight'
   },
   {
     display: '0',
@@ -143,7 +149,7 @@ useHead({
       <span v-else-if="result">{{ result }}</span>
       <span v-else>{{ displayString }}</span>
     </div>
-    <div class="grid grid-cols-4 p-4">
+    <div class="grid grid-cols-4 p-2">
       <CalculatorButton v-for="item of buttons" @click="calculate(item)" :color="item.color" :display="item.display" />
     </div>
   </div>
